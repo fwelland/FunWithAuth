@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
+    </context-param>
+    <context-param>
+        <param-name>javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>home.xhtml</welcome-file>
+    </welcome-file-list>
+    <security-constraint>
+        <display-name>Authenticated Access Only</display-name>
+        <web-resource-collection>
+            <web-resource-name>secured pages</web-resource-name>
+            <description>Have to be authenticated to see this stuff</description>
+            <url-pattern>/secure/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description>need to be authenticated </description>
+            <role-name>User</role-name>
+            <role-name>PriveledgedUser</role-name>
+            <role-name>Administrator</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <form-login-config>
+            <form-login-page>/login.xhtml</form-login-page>
+            <form-error-page>/loginFailed.xhtml</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-role>
+        <description>This is a just a normal user</description>
+        <role-name>User</role-name>
+    </security-role>
+    <security-role>
+        <description>This user has some mmore priviledges</description>
+        <role-name>PriveledgedUser</role-name>
+    </security-role>
+    <security-role>
+        <description>This Role is for administration</description>
+        <role-name>Administrator</role-name>
+    </security-role>
+</web-app>

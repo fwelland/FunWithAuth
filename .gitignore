@@ -1,0 +1,14 @@
+/.nb-gradle/
+/build/
+/.gradle/2.14/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin
+/.gradle/3.0/taskArtifacts/fileSnapshots.bin
+/.gradle/3.0/taskArtifacts/taskArtifacts.bin
+/.gradle/2.14/taskArtifacts/fileSnapshots.bin
+/.gradle/2.14/taskArtifacts/fileHashes.bin
+/.gradle/3.0/taskArtifacts/fileHashes.bin
+/.gradle/3.0/taskArtifacts/cache.properties.lock
+/.gradle/3.0/taskArtifacts/cache.properties
+/.gradle/2.14/taskArtifacts/taskArtifacts.bin
+/.gradle/2.14/taskArtifacts/cache.properties.lock
+/.gradle/2.14/taskArtifacts/cache.properties
+/.gradle/3.0/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin

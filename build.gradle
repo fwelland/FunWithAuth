@@ -1,0 +1,58 @@
+
+apply plugin: 'war'
+
+sourceCompatibility = '1.8'
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+if (project.hasProperty('evaluatingIDE') && project.property('evaluatingIDE') == 'NetBeans') {
+    sourceSets.main.java.srcDir(webAppDir.toString() )
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {    
+    providedCompile 'javax:javaee-api:7.0'    
+    providedCompile 'org.projectlombok:lombok:1.16.10'
+
+    testCompile 'junit:junit:4.10',
+                'org.spockframework:spock-core:1.0-groovy-2.4'
+}
+
+
+wrapper{
+    gradleVersion = '3.0'
+}
+
+ext.deployBase="/opt/wildfly/standalone/deployments"
+ext.deployTarget="$deployBase/$war.archiveName"
+ext.dodeployLCFname = "$deployTarget" + ".dodeploy"
+ext.deployedLCFname="$deployTarget" + ".deployed"
+ext.undeployedLCFname="$deployTarget" + ".undeployed"
+
+task updateResources(type: Copy) {
+    from 'src/main/webapp'
+    into deployTarget
+    include '**/*.xhtml'
+}
+
+task deployWar(type: Copy){
+
+    into deployTarget
+    with war
+
+    doLast{
+        def f = file(dodeployLCFname)
+        f.lastModified = System.currentTimeMillis()
+        f.createNewFile()
+    }
+}
+
+task undeployWar <<{
+    delete deployedLCFname
+    delete deployTarget
+    delete undeployedLCFname
+}
+
+deployWar.dependsOn war
